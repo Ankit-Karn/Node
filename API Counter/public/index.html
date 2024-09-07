@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Counter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+</head>
+<body>
+    <div id="counter">Loading...</div>
+    <script>
+        async function getAPICounter() {
+            try{
+                const res = await axios.get("http://localhost:3001/getCount");
+                document.getElementById("counter").innerHTML = `${res.data.count}`;
+            }catch(err){
+                console.error("Error: ", err);
+                document.getElementById("counter").innerHTML = `Error: ${err}`;
+            }
+        }
+        getAPICounter();
+        setInterval(getAPICounter, 5000);
+    </script>
+</body>
+</html>
